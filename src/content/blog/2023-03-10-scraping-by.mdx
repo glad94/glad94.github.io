@@ -19,8 +19,10 @@ Since anything(?) on the internet can be scraped, there was an opportunity to co
 
 1\. Scraper version 1 was actually pretty straightforward selenium; just locate all the ball elements and we're good to go. The challenge here was extracting the court dimensions and knowing what data transformations were needed.
 
-<img src="/img/2023-03-10-Scraping-By/charlie_serves.png" />
-Charlie needs to spot better
+<figure>
+  <img src="/img/2023-03-10-Scraping-By/charlie_serves.png" />
+  <figcaption>Charlie needs to spot better</figcaption>
+</figure>
 
 
 2\. The above gave me just the serve bounce coordinates and of course that isn't nearly enough. Ball speed, serve type, point context, etc... I had to revamp more or less all the automation to chronologically cycle through the match timeline and go ball-to-ball for information.
@@ -35,12 +37,16 @@ Charlie needs to spot better
 <img src="/img/2023-03-10-Scraping-By/Djokovic_Returns_vs_Tsitsipas.png" />
 
 
-<img src="/img/2023-03-10-Scraping-By/Tsitsipas_Returnsfaced_vs_Others.png" />
-Stefanos vs others: meh
+<figure>
+  <img src="/img/2023-03-10-Scraping-By/Tsitsipas_Returnsfaced_vs_Others.png" />
+  <figcaption>Stefanos vs others: meh</figcaption>
+</figure>
 
 
-<img src="/img/2023-03-10-Scraping-By/Tsitsipas_Returnsfaced_vs_Djokovic.png" />
-vs Novak: I'm in danger
+<figure>
+  <img src="/img/2023-03-10-Scraping-By/Tsitsipas_Returnsfaced_vs_Djokovic.png" />
+  <figcaption>vs Novak: I'm in danger</figcaption>
+</figure>
 
 
 5\. To be fair to myself, my original codes weren't entirely binned, as I still use parts of it now to crawl the ATP's website for the calendar, tournament results and match page URLs to create tables like this:

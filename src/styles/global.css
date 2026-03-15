@@ -135,13 +135,34 @@ blockquote {
   font-style: italic;
 }
 
-/* Images */
+/* Images & Figures */
 img {
   max-width: 100%;
   height: auto;
   border-radius: 8px;
   display: block;
   margin: 1.5rem auto;
+}
+
+figure {
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+figure img {
+  margin: 0;
+}
+
+figcaption {
+  margin-top: var(--space-3);
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  font-style: italic;
+  max-width: 80%;
+  line-height: 1.4;
 }
 
 /* Syntax Highlighting overrides based on theme */

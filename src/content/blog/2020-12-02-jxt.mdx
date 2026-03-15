@@ -54,9 +54,10 @@ where indices *i* refer to consecutive events alternating between players *p* an
 
 While JxT can be applied for player pairs over single matches up to a season, to enable a fair comparison between pairs who spent different amounts of time on the pitch together within a season, we introduce JxT/90 which weighs total JxT against the pair’s shared minutes: 
 
-<img src="https://latex.codecogs.com/gif.latex?\text{JxT}/90&space;=&space;\frac{&space;\sum^{M}_{m}&space;\text{JxT}_{m}&space;}&space;{&space;\sum^{M}_{m}&space;min_{m}&space;}" />
-
-where *min* is the total minutes played together per match *m*. 
+<figure>
+  <img src="https://latex.codecogs.com/gif.latex?\text{JxT}/90&space;=&space;\frac{&space;\sum^{M}_{m}&space;\text{JxT}_{m}&space;}&space;{&space;\sum^{M}_{m}&space;min_{m}&space;}" />
+  <figcaption>where *min* is the total minutes played together per match *m*.</figcaption>
+</figure>
 
 ### Comparison with JOI
 
@@ -66,8 +67,10 @@ I mentioned at the start of the above paragraph that my formulation of JxT was o
 
 JOI aside, you may have come across a pretty similar concept to this before in several versions of passing networks, e.g. 
 
-<img src="/img/2020-12-02-JxT/ast_liv_network_2021.jpg" />
-Totally coincidental choice of fixture here
+<figure>
+  <img src="/img/2020-12-02-JxT/ast_liv_network_2021.jpg" />
+  <figcaption>Totally coincidental choice of fixture here</figcaption>
+</figure>
 
 
 where the edges are coloured according to their strength of the passing link between 2 players. In fact, such visualisations possibly originated from Karun’s idea of interactive passing networks, which assigned directional weights to the edges based on the value from passes given/received values (he was using a version of xT to calculate the values here before he published about xT). While the ideas are indeed quite similar, the main difference is that the joint interaction action sequences don’t only include passes and dribbles between the pair of players. 
