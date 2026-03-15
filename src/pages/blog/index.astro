@@ -1,0 +1,135 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+const publishedPosts = allPosts
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// Get unique categories for simple filtering logic if needed later
+const categories = ['all', ...new Set(publishedPosts.map(post => post.data.category))];
+---
+
+<BaseLayout title="Blog" description="Read all my latest posts about sports data, projects, and more.">
+  <div class="blog-header">
+    <h1>Blog</h1>
+    <p>Thoughts, tutorials, and analysis.</p>
+  </div>
+
+  <div class="category-filters">
+    {categories.map((cat) => (
+      <button class={`filter-btn ${cat === 'all' ? 'active' : ''}`} data-category={cat}>
+        {cat.charAt(0).toUpperCase() + cat.slice(1)}
+      </button>
+    ))}
+  </div>
+
+  <div class="post-grid" id="post-grid">
+    {publishedPosts.map(post => (
+      <div class="post-item" data-category={post.data.category}>
+        <BlogCard 
+          title={post.data.title}
+          description={post.data.description}
+          date={post.data.date}
+          category={post.data.category}
+          slug={post.slug}
+          image={post.data.image}
+        />
+      </div>
+    ))}
+  </div>
+</BaseLayout>
+
+<script>
+  // Simple client-side filtering script
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const postItems = document.querySelectorAll('.post-item');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Update active class
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Filter posts
+        const selectedCategory = btn.getAttribute('data-category');
+        
+        postItems.forEach(item => {
+          const postCategory = item.getAttribute('data-category');
+          if (selectedCategory === 'all' || selectedCategory === postCategory) {
+            (item as HTMLElement).style.display = 'block';
+          } else {
+             (item as HTMLElement).style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>
+
+<style>
+  .blog-header {
+    text-align: center;
+    margin-bottom: var(--space-8);
+  }
+
+  h1 {
+    font-size: 3rem;
+    margin-bottom: var(--space-2);
+  }
+
+  p {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+  }
+
+  .category-filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-bottom: var(--space-8);
+  }
+
+  .filter-btn {
+    background-color: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    padding: 0.5em 1em;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .filter-btn:hover {
+    border-color: var(--color-accent-primary);
+  }
+
+  .filter-btn.active {
+    background-color: var(--color-accent-primary);
+    color: var(--color-bg);
+    border-color: var(--color-accent-primary);
+  }
+  
+  /* Make the dark theme active state text readable */
+  :global([data-theme='dark']) .filter-btn.active {
+    color: var(--color-bg);
+  }
+
+  .post-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 640px) {
+    .post-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

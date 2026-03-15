@@ -1,0 +1,153 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+/* Base Design Tokens */
+:root {
+  /* Sky & Clay Light Theme */
+  --color-bg: #faf9f6;
+  --color-text: #1a1a2e;
+  --color-text-muted: #6b7280;
+  --color-accent-primary: #c2770e;
+  --color-accent-secondary: #1a7a5c;
+  --color-surface: #f0eeeb;
+  --color-border: #e0ddd8;
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* Viewport Maximums */
+  --content-width: 768px;
+}
+
+/* Dark Theme */
+[data-theme='dark'] {
+  --color-bg: #0c1323;
+  --color-text: #e8e6e3;
+  --color-text-muted: #9ca3af;
+  --color-accent-primary: #f0b847;
+  --color-accent-secondary: #34d399;
+  --color-surface: #151d30;
+  --color-border: #2a3450;
+}
+
+/* Reset & Global Styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  scroll-behavior: smooth;
+  /* Smooth theme transition */
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-4);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-text);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+}
+
+h1 { font-size: 2.25rem; }
+h2 { font-size: 1.875rem; }
+h3 { font-size: 1.5rem; }
+
+a {
+  color: var(--color-accent-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+/* Code & Tech terms */
+code, kbd, samp, pre {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+}
+
+code {
+  background-color: var(--color-surface);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+}
+
+pre {
+  padding: var(--space-4);
+  background-color: var(--color-surface) !important;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+}
+
+pre code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+/* Blockquotes */
+blockquote {
+  margin: 0 0 1.5rem 0;
+  padding-left: 1rem;
+  border-left: 4px solid var(--color-accent-secondary);
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  margin: 1.5rem auto;
+}
+
+/* Syntax Highlighting overrides based on theme */
+html[data-theme='dark'] .shiki.light {
+  display: none;
+}
+html[data-theme='light'] .shiki.dark {
+  display: none;
+}

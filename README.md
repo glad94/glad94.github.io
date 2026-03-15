@@ -1,30 +1,43 @@
-# Hydejack Starter Kit
+# Astro Starter Kit: Minimal
 
-A quicker, cleaner way to get started blogging with [Hydejack](https://hydejack.com/).
+```sh
+npm create astro@latest -- --template minimal
+```
 
-## Quick Start
-### Running locally
-1. Clone repository (git users), or [download] and unzip.
-2. Open terminal, `cd` into root directory (where `_config.yml` is located)
-3. Run `bundle install` [^1]
-4. Run `bundle exec jekyll serve`
-5. Open <http://localhost:4000/>
+> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
-### GitHub Pages
-1. Fork this repository.
-2. Go to **Settings**, rename repository to `<your github username>.github.io` (without the `<` `>`)
-3. Edit `_config.yml` (you can do this directly on GitHub)
-    1. Change `url` to `https://<your github username>.github.io` (without the `<` `>`)
-    2. Change `baseurl` to `''` (empty string)
-    3. **Commit changes**.
-4. Go to **Settings** again, look for **GitHub Pages**, set **Source** to **master branch**.
-5. Click **Save** and wait for GitHub to set up your new blag.
+## 🚀 Project Structure
 
-## What's next?
-* Open files and read the comments
-* Read the [docs](https://hydejack.com/docs/)
-* Buy the [PRO version](https://hydejack.com/download/) to get the project and resume layout, newsletter subscription box, custom forms, and more.
+Inside of your Astro project, you'll see the following folders and files:
 
-[^1]: Requires Bundler. Install with `gem install bundler`.
+```text
+/
+├── public/
+├── src/
+│   └── pages/
+│       └── index.astro
+└── package.json
+```
 
-[download]: https://github.com/hydecorp/hydejack-starter-kit/archive/master.zip
+Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+
+There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+
+Any static assets, like images, can be placed in the `public/` directory.
+
+## 🧞 Commands
+
+All commands are run from the root of the project, from a terminal:
+
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm install`             | Installs dependencies                            |
+| `npm run dev`             | Starts local dev server at `localhost:4321`      |
+| `npm run build`           | Build your production site to `./dist/`          |
+| `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro -- --help` | Get help using the Astro CLI                     |
+
+## 👀 Want to learn more?
+
+Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).

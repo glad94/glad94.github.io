@@ -1,0 +1,176 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+
+type Props = CollectionEntry<'blog'>['data'];
+
+const { title, description, date, category, tags, image } = Astro.props;
+
+// Format date
+const dateString = new Date(date).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+---
+
+<BaseLayout title={title} description={description} image={image}>
+  <article class="blog-post">
+    <header class="post-header">
+      <div class="post-meta">
+        <span class="category-pill">{category}</span>
+        <time datetime={date.toISOString()}>{dateString}</time>
+      </div>
+      
+      <h1 class="post-title">{title}</h1>
+      
+      {description && <p class="post-description">{description}</p>}
+      
+      {tags && tags.length > 0 && (
+        <div class="post-tags">
+          {tags.map((tag) => (
+            <span class="tag">#{tag}</span>
+          ))}
+        </div>
+      )}
+    </header>
+
+    {image && (
+      <div class="hero-image">
+        <img src={image} alt={`Cover image for ${title}`} />
+      </div>
+    )}
+
+    <div class="post-content">
+      <slot />
+    </div>
+    
+    <hr class="post-footer-divider" />
+    <div class="post-back-link">
+      <a href="/blog/">&larr; Back to all posts</a>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .blog-post {
+    max-width: var(--content-width);
+    margin: 0 auto;
+  }
+
+  .post-header {
+    margin-bottom: var(--space-8);
+    text-align: center;
+  }
+
+  .post-meta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .category-pill {
+    background-color: var(--color-surface);
+    padding: 0.25em 0.75em;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-accent-secondary);
+    border: 1px solid var(--color-border);
+  }
+
+  .post-title {
+    margin: 0 0 var(--space-4) 0;
+    font-size: 2.5rem;
+    line-height: 1.1;
+  }
+
+  .post-description {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    font-weight: 400;
+    max-width: 600px;
+    margin: 0 auto var(--space-6) auto;
+  }
+
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-2);
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--color-accent-primary);
+  }
+
+  .hero-image {
+    margin-bottom: var(--space-8);
+  }
+
+  .hero-image img {
+    width: 100%;
+    margin: 0;
+  }
+
+  .post-content {
+    font-size: 1.125rem;
+    line-height: 1.7;
+  }
+
+  /* Target MDX rendered content */
+  .post-content :global(h2) {
+    margin-top: 2.5rem;
+		font-size: 1.75rem;
+  }
+
+  .post-content :global(h3) {
+    margin-top: 2rem;
+		font-size: 1.35rem;
+  }
+
+  .post-content :global(p) {
+    margin-bottom: 1.75rem;
+  }
+
+  .post-content :global(ul),
+  .post-content :global(ol) {
+    margin-bottom: 1.75rem;
+    padding-left: 1.5rem;
+  }
+
+  .post-content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
+	.post-content :global(img) {
+		margin: 2rem auto;
+		border: 1px solid var(--color-border);
+	}
+	
+  .post-footer-divider {
+    margin: var(--space-12) 0 var(--space-8);
+    border: 0;
+    height: 1px;
+    background-color: var(--color-border);
+  }
+
+  .post-back-link a {
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  @media (max-width: 600px) {
+    .post-title {
+      font-size: 2rem;
+    }
+  }
+</style>

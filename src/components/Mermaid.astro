@@ -1,0 +1,71 @@
+---
+interface Props {
+  chart: string;
+}
+
+const { chart } = Astro.props;
+---
+
+<div class="mermaid-container">
+  <pre class="mermaid">
+    {chart}
+  </pre>
+</div>
+
+<script>
+  import mermaid from 'mermaid';
+
+  // Function to initialize mermaid with theme based on current data-theme
+  function initMermaid() {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: isDark ? 'dark' : 'default',
+      securityLevel: 'loose',
+      fontFamily: "var(--font-sans)",
+    });
+    
+    // Process all elements with class 'mermaid'
+    mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+  }
+
+  // Run on first load
+  document.addEventListener('DOMContentLoaded', initMermaid);
+  
+  // Create an observer to re-render when theme changes
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.attributeName === 'data-theme') {
+        const containers = document.querySelectorAll('.mermaid-container');
+        containers.forEach(container => {
+           // We need to fetch the original text and re-render.
+           // In a real app this might need more robust state management.
+           // For simple diagrams this is sufficient.
+           const originalText = container.getAttribute('data-original') || container.textContent;
+           if (!container.getAttribute('data-original')) {
+             container.setAttribute('data-original', originalText);
+           }
+           
+           container.innerHTML = `<pre class="mermaid">${originalText}</pre>`;
+        });
+        initMermaid();
+      }
+    });
+  });
+
+  observer.observe(document.documentElement, { attributes: true });
+</script>
+
+<style>
+  .mermaid-container {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+    padding: 1rem;
+    background-color: var(--color-surface);
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    overflow-x: auto;
+  }
+</style>
